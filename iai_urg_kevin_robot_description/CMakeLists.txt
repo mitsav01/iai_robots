@@ -1,11 +1,14 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(iai_urg_kevin_robot_description)
 
-find_package(catkin REQUIRED COMPONENTS )
+# Find ament packages and dependencies
+find_package(ament_cmake REQUIRED)
 
-catkin_package()
-
-install(
-  DIRECTORY meshes urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# Install directories (if there are specific resources to install)
+install(DIRECTORY launch urdf rviz2
+  DESTINATION share/${PROJECT_NAME}
 )
+
+
+# ament package declaration
+ament_package()

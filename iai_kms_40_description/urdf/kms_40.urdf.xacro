@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"
-       name="kms_40">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kms_40">
+
+  <!-- Define Grey material -->
+  <material name="Grey">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+
+  <!-- Define the world link -->
+  <link name="world"/>
 
   <xacro:macro name="kms_40_xacro" params="prefix parent *origin">
 
@@ -31,19 +38,15 @@
       </collision>
     </link>
 
-
     <!-- Empty link just to get the frame out -->
     <link name="${prefix}adapter_iso50_kms40_frame_out"/>
-
 
     <!-- joint positioning the frame_out -->
     <joint name="${prefix}adapter_iso50_kms40_trans_frame_out" type="fixed">
       <origin xyz="0 0 0.016" rpy="0 0 0" />
       <parent link="${prefix}adapter_iso50_kms40_frame_in" />
       <child link="${prefix}adapter_iso50_kms40_frame_out" />
-      <axis xyz="0 0 0" />
     </joint>
-
 
     <!-- Now joint connecting the actual kms40 sensor -->
     <joint name="${prefix}kms40_joint" type="fixed">
@@ -73,18 +76,20 @@
     </link>
 
     <!-- Empty link just to get the frame out -->
-    <!-- This is also the reference frame for the force/torque data -->
     <link name="${prefix}kms40_frame_out"/>
-
 
     <!-- joint positioning the frame_out -->
     <joint name="${prefix}kms40_trans_frame_out" type="fixed">
       <origin xyz="0 0 0.027" rpy="0 0 0" />
       <parent link="${prefix}kms40_frame_in" />
       <child link="${prefix}kms40_frame_out" />
-      <axis xyz="0 0 0" />
     </joint>
 
   </xacro:macro>
+
+  <!-- Instantiate the macro with the required origin -->
+  <xacro:kms_40_xacro prefix="" parent="world">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:kms_40_xacro>
 
 </robot>
