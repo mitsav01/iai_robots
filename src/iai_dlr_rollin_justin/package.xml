@@ -1,0 +1,25 @@
+<package format="3">
+  <name>iai_dlr_rollin_justin</name>
+  <version>0.0.0</version>
+  <description>
+    URDF description of the dlr rollin justin robot.
+  </description>
+
+  <maintainer email="luc_kro@uni-bremen.de">Luca Krohm</maintainer>
+
+  <author email="hoanggia@uni-bremen.de">Giang Nguyen</author>
+  
+  <license>GPLv3+</license>
+
+  <!-- Build tool dependencies for ROS 2 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <!-- Export section for ROS 2 -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>
+

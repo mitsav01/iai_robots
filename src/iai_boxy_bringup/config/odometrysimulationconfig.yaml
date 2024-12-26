@@ -1,0 +1,25 @@
+ros2_control:
+  parameters:
+    hardware:
+      type: "ros2_control_demo_hardware/GenericSystem"  # Use a simulated system
+      joints:
+        - name: "wheel_left_joint"
+          command_interface: "velocity"
+          state_interfaces: ["velocity", "position"]
+        - name: "wheel_right_joint"
+          command_interface: "velocity"
+          state_interfaces: ["velocity", "position"]
+      read_only_states:
+        - "odom"
+      update_rate: 100  # Set an appropriate update rate
+    controllers:
+      odometry_controller:
+        type: "diff_drive_controller/DiffDriveController"
+        left_wheel: "wheel_left_joint"
+        right_wheel: "wheel_right_joint"
+        publish_rate: 50  # Hz
+        odom_frame: "odom"
+        base_frame: "base_footprint"
+        wheel_separation: 0.4  # Adjust based on robot's wheel separation
+        wheel_radius: 0.05     # Adjust based on robot's wheel radius
+        velocity_rolling_window_size: 2

@@ -1,0 +1,27 @@
+<package format="3">
+  <name>iai_boxy_torso</name>
+  <version>0.0.0</version>
+  <description>
+    URDF description of the torso of the IAI robot named Boxy.
+  </description>
+
+  <maintainer email="amaldo@cs.uni-bremen.de">Alexis Maldonado</maintainer>
+  <maintainer email="georg.bartels@cs.uni-bremen.de">Georg Bartels</maintainer>
+
+  <author email="amaldo@cs.uni-bremen.de">Alexis Maldonado</author>
+
+  <license>GPLv3+</license>
+
+  <url type="bugtracker">https://github.com/code-iai/iai_robots/issues</url>
+  <url type="repository">https://github.com/code-iai/iai_robots</url>
+
+  <!-- Build tool dependencies for ROS 2 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <!-- Export section for ROS 2 -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,28 @@
+<package format="3">
+  <name>iai_table_robot_description</name>
+  <version>0.0.0</version>
+  <description>
+    URDF description of the table-mounted UR5 robots in the lab of the IAI. 
+  </description>
+
+  <maintainer email="georg.bartels@cs.uni-bremen.de">Georg Bartels</maintainer>
+  <author email="georg.bartels@cs.uni-bremen.de">Georg Bartels</author>
+
+  <license>TODO</license>
+
+  <!-- Build tool dependencies for ROS 2 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>iai_ur_description</exec_depend>
+  <exec_depend>iai_kms_40_description</exec_depend>
+  <exec_depend>iai_wsg_50_description</exec_depend>
+  <exec_depend>iai_adapters_description</exec_depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+
+</package>
