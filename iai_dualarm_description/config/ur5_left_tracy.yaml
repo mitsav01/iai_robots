@@ -1,4 +1,4 @@
-controller_manager:
+/left_arm/controller_manager:
   ros__parameters:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -19,19 +19,13 @@ controller_manager:
       type: ur_controllers/ScaledJointTrajectoryController
 
     forward_velocity_controller:
-      type: forward_command_controller/ForwardCommandController
-
-    forward_effort_controller:
-      type: forward_command_controller/ForwardCommandController
+      type: velocity_controllers/JointGroupVelocityController
 
     forward_position_controller:
-      type: forward_command_controller/ForwardCommandController
+      type: position_controllers/JointGroupPositionController
 
     force_mode_controller:
       type: ur_controllers/ForceModeController
-
-    friction_model_controller:
-      type: ur_controllers/FrictionModelController
 
     freedrive_mode_controller:
       type: ur_controllers/FreedriveModeController
@@ -56,23 +50,20 @@ controller_manager:
     # true.
     enforce_command_limits: false
 
-    motion_primitive_forward_controller:
-      type: motion_primitives_controllers/MotionPrimitivesForwardController
-
-speed_scaling_state_broadcaster:
+/left_arm/speed_scaling_state_broadcaster:
   ros__parameters:
     state_publish_rate: 100.0
     tf_prefix: "$(var tf_prefix)"
 
-io_and_status_controller:
+/left_arm/io_and_status_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
 
-ur_configuration_controller:
+/left_arm/ur_configuration_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
 
-force_torque_sensor_broadcaster:
+/left_arm/force_torque_sensor_broadcaster:
   ros__parameters:
     sensor_name: $(var tf_prefix)tcp_fts_sensor
     state_interface_names:
@@ -82,11 +73,11 @@ force_torque_sensor_broadcaster:
       - torque.x
       - torque.y
       - torque.z
-    frame_id: $(var tf_prefix)tool0_controller
+    frame_id: $(var tf_prefix)tool0
     topic_name: ft_data
 
 
-joint_trajectory_controller:
+/left_arm/joint_trajectory_controller:
   ros__parameters:
     joints:
       - $(var tf_prefix)shoulder_pan_joint
@@ -106,20 +97,15 @@ joint_trajectory_controller:
     constraints:
       stopped_velocity_tolerance: 0.2
       goal_time: 0.0
-      $(var tf_prefix)shoulder_pan_joint: {trajectory: 0.2, goal: 0.1}
-      $(var tf_prefix)shoulder_lift_joint: {trajectory: 0.2, goal: 0.1}
-      $(var tf_prefix)elbow_joint: {trajectory: 0.2, goal: 0.1}
-      $(var tf_prefix)wrist_1_joint: {trajectory: 0.2, goal: 0.1}
-      $(var tf_prefix)wrist_2_joint: {trajectory: 0.2, goal: 0.1}
-      $(var tf_prefix)wrist_3_joint: {trajectory: 0.2, goal: 0.1}
-    speed_scaling:
-      state_interface: $(var tf_prefix)speed_scaling/speed_scaling_factor
-      # Setting the command interface currently would clash with the io_and_status_controller
-      # This will probably be changed in the future.
-      # command_interface: $(var tf_prefix)speed_scaling/target_speed_fraction_cmd
+      $(var tf_prefix)shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
+      $(var tf_prefix)shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
+      $(var tf_prefix)elbow_joint: { trajectory: 0.2, goal: 0.1 }
+      $(var tf_prefix)wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
+      $(var tf_prefix)wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
+      $(var tf_prefix)wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
 
 
-scaled_joint_trajectory_controller:
+/left_arm/scaled_joint_trajectory_controller:
   ros__parameters:
     joints:
       - $(var tf_prefix)shoulder_pan_joint
@@ -147,7 +133,7 @@ scaled_joint_trajectory_controller:
       $(var tf_prefix)wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
     speed_scaling_interface_name: $(var tf_prefix)speed_scaling/speed_scaling_factor
 
-passthrough_trajectory_controller:
+/left_arm/passthrough_trajectory_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
     joints:
@@ -162,7 +148,7 @@ passthrough_trajectory_controller:
       - velocity
     speed_scaling_interface_name: $(var tf_prefix)speed_scaling/speed_scaling_factor
 
-forward_velocity_controller:
+/left_arm/forward_velocity_controller:
   ros__parameters:
     joints:
       - $(var tf_prefix)shoulder_pan_joint
@@ -173,7 +159,7 @@ forward_velocity_controller:
       - $(var tf_prefix)wrist_3_joint
     interface_name: velocity
 
-forward_effort_controller:
+/left_arm/forward_position_controller:
   ros__parameters:
     joints:
       - $(var tf_prefix)shoulder_pan_joint
@@ -182,43 +168,22 @@ forward_effort_controller:
       - $(var tf_prefix)wrist_1_joint
       - $(var tf_prefix)wrist_2_joint
       - $(var tf_prefix)wrist_3_joint
-    interface_name: effort
 
-forward_position_controller:
-  ros__parameters:
-    joints:
-      - $(var tf_prefix)shoulder_pan_joint
-      - $(var tf_prefix)shoulder_lift_joint
-      - $(var tf_prefix)elbow_joint
-      - $(var tf_prefix)wrist_1_joint
-      - $(var tf_prefix)wrist_2_joint
-      - $(var tf_prefix)wrist_3_joint
-    interface_name: position
-
-force_mode_controller:
+/left_arm/force_mode_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
 
-friction_model_controller:
+/left_arm/freedrive_mode_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
 
-freedrive_mode_controller:
-  ros__parameters:
-    tf_prefix: "$(var tf_prefix)"
-
-tcp_pose_broadcaster:
+/left_arm/tcp_pose_broadcaster:
   ros__parameters:
     frame_id: $(var tf_prefix)base
     pose_name: $(var tf_prefix)tcp_pose
     tf:
       child_frame_id: $(var tf_prefix)tool0_controller
 
-tool_contact_controller:
-  ros__parameters:
-    tf_prefix: "$(var tf_prefix)"
-
-
-motion_primitive_forward_controller:
+/left_arm/tool_contact_controller:
   ros__parameters:
     tf_prefix: "$(var tf_prefix)"
